@@ -22,14 +22,12 @@ const transporter = nodemailer.createTransport({
 // Sign-in endpoint to generate token and send it via email
 app.post('/signin', (req, res) => {
   const { email } = req.body;
-  console.log(email);
   if (!email) {
     return res.status(400).json({ error: 'Email is required' });
   }
 
   // Generate JWT token
   const token = jwt.sign({ email }, SECRET_KEY, { expiresIn: '1h' });
-  console.log(token);
 
   // Send token via email
   const mailOptions = {
